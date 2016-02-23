@@ -1,2 +1,2 @@
 # CMSC21
-Fundaments of Programming
+Fundamentals of Programming
