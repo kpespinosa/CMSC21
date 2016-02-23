@@ -1,24 +1,32 @@
 #include <stdio.h>
- 
-int main() {
-  FILE *fp = fopen("input.txt", "r");
-  FILE *ofp = fopen("output.txt", "w");
 
-  if (fp != NULL && ofp != NULL) {
-    int age;
-    char name[10];
+/**
+Read a file and after transformation, write it to another file.
+*/
+int main()
+{
+	//create input and output file pointers
+	FILE* in = fopen("input.txt", "r");
+	FILE* out = fopen("output.txt", "w");
 
-    while (fscanf(fp, "%s%d", name, &age) == 2) {
-      printf("%s is %d years old\n", name, age);
-      fprintf(ofp, "%s is %d years old\n", name, age);
-    }
+	//check if file exists
+	if (in != NULL)
+	{
+		char firstname[20];
+		int age;
 
-    fclose(fp);
-    fclose(ofp);
-
-  } else {
-    printf("Can't open files!\n");
-  }
-
-  return 0;
+		//check if the line has two tokens (firstname, age)
+		while (fscanf(in, "%s%d", firstname, &age) == 2)
+		{
+			printf("Happy %dth birthday, %s\n", age, firstname);	
+			fprintf(out, "Happy %dth birthday, %s\n", age, firstname);
+		}
+		fclose(in);
+		fclose(out);
+	}
+	else
+	{
+		printf("File does not exist.\n");
+	}
+	return 0;
 }
